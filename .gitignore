@@ -1,0 +1,21 @@
+# generated outputs — reproduce locally with the commands in README.md
+out*/
+**/*_marked.png
+**/*.hint.json
+**/__pycache__/
+*.pyc
+
+# the validation artifacts kept in this working copy
+analysis_card.png
+annotated.png
+corrected.png
+corrected.webp
+results.json
+source.webp
+marked_test.png
+
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
