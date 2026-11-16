@@ -1,0 +1,16 @@
+{
+  "model": "deepseek-v4.1-flash",
+  "conditions": [
+    "strong_fixed"
+  ],
+  "n": 24,
+  "name_accuracy": 0.625,
+  "mean_dE00": 2.91,
+  "by_condition": {
+    "strong_fixed": {
+      "n": 24,
+      "name_accuracy": 0.625,
+      "mean_dE00": 2.91
+    }
+  }
+}

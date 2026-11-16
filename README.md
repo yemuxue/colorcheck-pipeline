@@ -64,3 +64,11 @@ python colorcheck_pipeline.py photo.jpg --hint 0.17,0.51 0.39,0.63 0.05,0.62 0.2
 ## License
 
 MIT — 见 [LICENSE](LICENSE)。
+
+## 评测实验
+
+`experiments/colorcheck/` 里是用本工具做的一组多模态色彩感知实验：3 个模型 × 144 张受控图，
+测量偏色、欠曝、压缩对模型判断的影响，并做了「校正前 / 校正后」对照。
+
+结果：强偏色使准确率从 91.7% 降到 62.5%；只做输入校正即可回升 25 个百分点。
+详见 [experiments/colorcheck/README.md](experiments/colorcheck/README.md)。

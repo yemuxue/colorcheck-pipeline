@@ -1,0 +1,16 @@
+{
+  "model": "glm-5.3-flash",
+  "conditions": [
+    "clean"
+  ],
+  "n": 1,
+  "name_accuracy": 1.0,
+  "mean_dE00": 2.6,
+  "by_condition": {
+    "clean": {
+      "n": 1,
+      "name_accuracy": 1.0,
+      "mean_dE00": 2.6
+    }
+  }
+}

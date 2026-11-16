@@ -1,0 +1,16 @@
+{
+  "model": "kimi-k3",
+  "conditions": [
+    "strong_fixed"
+  ],
+  "n": 24,
+  "name_accuracy": 0.875,
+  "mean_dE00": 3.42,
+  "by_condition": {
+    "strong_fixed": {
+      "n": 24,
+      "name_accuracy": 0.875,
+      "mean_dE00": 3.42
+    }
+  }
+}

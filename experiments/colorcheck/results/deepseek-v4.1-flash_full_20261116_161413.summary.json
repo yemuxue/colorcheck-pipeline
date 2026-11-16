@@ -1,0 +1,46 @@
+{
+  "model": "deepseek-v4.1-flash",
+  "conditions": [
+    "clean",
+    "mild",
+    "strong",
+    "noise",
+    "dark",
+    "jpeg"
+  ],
+  "n": 144,
+  "name_accuracy": 0.625,
+  "mean_dE00": 7.16,
+  "by_condition": {
+    "clean": {
+      "n": 24,
+      "name_accuracy": 0.708,
+      "mean_dE00": 2.21
+    },
+    "mild": {
+      "n": 24,
+      "name_accuracy": 0.708,
+      "mean_dE00": 3.82
+    },
+    "strong": {
+      "n": 24,
+      "name_accuracy": 0.458,
+      "mean_dE00": 8.71
+    },
+    "noise": {
+      "n": 24,
+      "name_accuracy": 0.792,
+      "mean_dE00": 4.95
+    },
+    "dark": {
+      "n": 24,
+      "name_accuracy": 0.458,
+      "mean_dE00": 18.45
+    },
+    "jpeg": {
+      "n": 24,
+      "name_accuracy": 0.625,
+      "mean_dE00": 5.09
+    }
+  }
+}

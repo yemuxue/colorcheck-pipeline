@@ -1,0 +1,46 @@
+{
+  "model": "glm-5.3-flash",
+  "conditions": [
+    "clean",
+    "mild",
+    "strong",
+    "noise",
+    "dark",
+    "jpeg"
+  ],
+  "n": 144,
+  "name_accuracy": 0.701,
+  "mean_dE00": 7.05,
+  "by_condition": {
+    "clean": {
+      "n": 24,
+      "name_accuracy": 0.833,
+      "mean_dE00": 4.77
+    },
+    "mild": {
+      "n": 24,
+      "name_accuracy": 0.792,
+      "mean_dE00": 5.02
+    },
+    "strong": {
+      "n": 24,
+      "name_accuracy": 0.417,
+      "mean_dE00": 10.28
+    },
+    "noise": {
+      "n": 24,
+      "name_accuracy": 0.75,
+      "mean_dE00": 5.66
+    },
+    "dark": {
+      "n": 24,
+      "name_accuracy": 0.708,
+      "mean_dE00": 10.92
+    },
+    "jpeg": {
+      "n": 24,
+      "name_accuracy": 0.708,
+      "mean_dE00": 5.67
+    }
+  }
+}

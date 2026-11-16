@@ -1,0 +1,22 @@
+{
+  "model": "deepseek-v4.1-flash",
+  "conditions": [
+    "clean",
+    "mild"
+  ],
+  "n": 12,
+  "name_accuracy": 0.417,
+  "mean_dE00": 3.75,
+  "by_condition": {
+    "clean": {
+      "n": 6,
+      "name_accuracy": 0.5,
+      "mean_dE00": 3.82
+    },
+    "mild": {
+      "n": 6,
+      "name_accuracy": 0.333,
+      "mean_dE00": 3.64
+    }
+  }
+}
