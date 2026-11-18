@@ -122,8 +122,8 @@ def fig_f01():
     box(d, (QX[0], QY), QW, QH, "命名", "「这是一块什么颜色？」→ 对 / 错", fill=SOFT, border=BLUE)
     box(d, (QX[1], QY), QW, QH, "色差", "「它的 Lab 与标准值差多少？」→ ΔE00", fill=SOFT, border=BLUE)
 
-    # 问法 → 模型：两张卡直接下落到模型总线，再一分三
-    m_bus = MY - 42
+    # 问法 → 模型：两张卡直接落到模型总线（一条横线，三个分支）
+    m_bus = MY - 30
     for cx in QC:
         d.line([(cx, QY + QH), (cx, m_bus)], fill=BLUE, width=3)
     d.line([(MC[0], m_bus), (MC[-1], m_bus)], fill=BLUE, width=3)
