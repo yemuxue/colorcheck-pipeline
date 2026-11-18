@@ -42,9 +42,9 @@ def header(d, w, num, title, subtitle):
 def box(d, xy, w, h, title, sub, fill="white", border=LINE, fg=INK):
     x, y = xy
     d.rounded_rectangle([x, y, x + w, y + h], radius=12, fill=fill, outline=border, width=2)
-    d.text((x + 20, y + h / 2 - 18), title, font=font(26, True), fill=fg)
+    d.text((x + 24, y + h / 2 - 34), title, font=font(26, True), fill=fg)
     if sub:
-        d.text((x + 20, y + h / 2 + 10), sub, font=font(20), fill=MUTED)
+        d.text((x + 24, y + h / 2 - 2), sub, font=font(20), fill=MUTED)
 
 
 def arrow(d, x1, y1, x2, y2, color=MUTED, width=3):
@@ -65,12 +65,12 @@ def fig_f01():
         ("指标", "命名准确率\n平均 ΔE00", 1320),
     ]
     for name, sub, x in stages:
-        box(d, (x, 320), 340, 240, name, sub, fill=SOFT, border=BLUE)
+        box(d, (x, 330), 340, 170, name, sub, fill=SOFT, border=BLUE)
     for i in range(3):
-        arrow(d, stages[i][2] + 340, 440, stages[i + 1][2] - 10, 440)
+        arrow(d, stages[i][2] + 340, 415, stages[i + 1][2] - 10, 415)
 
-    box(d, (120, 640), 760, 180, "基准：clean 原图", "作为对照组，衡量退化带来的偏移", fill="#FFFFFF")
-    box(d, (920, 640), 760, 180, "干预：修正输入", "只改输入不改模型，看回补多少", fill="#FFFFFF")
+    box(d, (120, 620), 760, 150, "基准：clean 原图", "作为对照组，衡量退化带来的偏移", fill="#FFFFFF")
+    box(d, (920, 620), 760, 150, "干预：修正输入", "只改输入不改模型，看回补多少", fill="#FFFFFF")
 
     d.text((100, 890), "注：504 = 3 个模型 × (144 基准 + 72 干预)；一条记录一次调用，可逐条核对。",
            font=font(22), fill=MUTED)
