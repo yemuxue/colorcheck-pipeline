@@ -56,7 +56,7 @@ STIMULI = [
     ("v_clean.png", "干净", "基准"),
     ("v_mild.png", "轻微偏色", "±8 ΔE"),
     ("v_strong.png", "强偏色", "±25 ΔE"),
-    ("v_strong_fixed.png", "校正后", "同一张图"),
+    ("v_strong_fixed.png", "校正后", "输入已修"),
     ("v_noise.png", "噪声", "σ = 12"),
     ("v_dark.png", "欠曝", "−2 EV"),
     ("v_jpeg.png", "JPEG", "q = 35"),
@@ -80,59 +80,72 @@ def fig_f01():
     d._image = img
     header(d, w, "F01", "实验设计", "一张物理色卡、七个退化版本、两种问法、三个模型")
 
+    M = 100                      # 左右边距
+    TW, TH, GAP = 200, 136, 18   # 缩略图
+    ROW_Y = 318
+
+    # 几何：所有连线都由这些常量推导，避免手写坐标对不齐
+    QW, QH = 760, 104
+    QX = [M, w - M - QW]                 # 100, 940
+    QC = [x + QW / 2 for x in QX]        # 480, 1320
+    QY = 632
+
+    MW, MH = 500, 72
+    MX = [M, (w - MW) / 2, w - M - MW]   # 100, 650, 1200
+    MC = [x + MW / 2 for x in MX]        # 350, 900, 1450
+    MY = 840
+
+    CX = w / 2                            # 900，整图中轴
+
     # 刺激行
-    d.text((100, 274), "刺激", font=font(24, True), fill=NAVY)
-    d.text((176, 278), "同一张色卡，只改成像条件", font=font(20), fill=MUTED)
+    d.text((M, 274), "刺激", font=font(24, True), fill=NAVY)
+    d.text((M + 76, 278), "同一张色卡，只改成像条件", font=font(20), fill=MUTED)
 
-    tw, th = 200, 136
-    gap = 18
-    x = 100
-    for i, (fname, label, sub) in enumerate(STIMULI):
-        y = 318
-        thumb(d, BASE / "experiments/colorcheck/images" / fname, (x, y), (tw, th))
-        cx = x + tw / 2
-        d.text((cx, y + th + 22), label, font=font(20, True), fill=INK, anchor="ma")
-        d.text((cx, y + th + 46), sub, font=font(16), fill=MUTED, anchor="ma")
-        x += tw + gap
+    x = M
+    for fname, label, sub in STIMULI:
+        thumb(d, BASE / "experiments/colorcheck/images" / fname, (x, ROW_Y), (TW, TH))
+        cx = x + TW / 2
+        d.text((cx, ROW_Y + TH + 22), label, font=font(20, True), fill=INK, anchor="ma")
+        d.text((cx, ROW_Y + TH + 46), sub, font=font(16), fill=MUTED, anchor="ma")
+        x += TW + GAP
 
-    # 刺激 → 问法（一分二）
-    d.line([(900, 520), (900, 552)], fill=BLUE, width=3)
-    d.line([(480, 552), (1240, 552)], fill=BLUE, width=3)
-    for cx in (480, 1240):
-        arrow(d, cx, 552, cx, 592, color=BLUE)
+    ROW_BOTTOM = ROW_Y + TH + 74          # 标签下沿再留 12px 间距
 
-    d.text((100, 596), "问法", font=font(24, True), fill=NAVY)
+    # 刺激 → 问法：中轴下行，横向汇流，再落到两张卡的中心
+    bus_y = ROW_BOTTOM + 26
+    d.line([(CX, ROW_BOTTOM), (CX, bus_y)], fill=BLUE, width=3)
+    d.line([(QC[0], bus_y), (QC[1], bus_y)], fill=BLUE, width=3)
+    for cx in QC:
+        arrow(d, cx, bus_y, cx, QY - 2, color=BLUE)
 
-    box(d, (100, 632), 760, 104, "命名", "「这是一块什么颜色？」→ 对 / 错", fill=SOFT, border=BLUE)
-    box(d, (940, 632), 760, 104, "色差", "「它的 Lab 与标准值差多少？」→ ΔE00", fill=SOFT, border=BLUE)
+    d.text((M, QY - 34), "问法", font=font(24, True), fill=NAVY)
+    box(d, (QX[0], QY), QW, QH, "命名", "「这是一块什么颜色？」→ 对 / 错", fill=SOFT, border=BLUE)
+    box(d, (QX[1], QY), QW, QH, "色差", "「它的 Lab 与标准值差多少？」→ ΔE00", fill=SOFT, border=BLUE)
 
-    # 问法 → 模型（两张卡汇入，再一分三）
-    for cx in (480, 1240):
-        d.line([(cx, 736), (cx, 752)], fill=BLUE, width=3)
-    d.line([(480, 752), (1240, 752)], fill=BLUE, width=3)
-    d.line([(900, 752), (900, 764)], fill=BLUE, width=3)
-    d.line([(350, 764), (1430, 764)], fill=BLUE, width=3)
-    for cx in (350, 890, 1430):
-        arrow(d, cx, 764, cx, 800, color=BLUE)
+    # 问法 → 模型：两张卡直接下落到模型总线，再一分三
+    m_bus = MY - 42
+    for cx in QC:
+        d.line([(cx, QY + QH), (cx, m_bus)], fill=BLUE, width=3)
+    d.line([(MC[0], m_bus), (MC[-1], m_bus)], fill=BLUE, width=3)
+    for cx in MC:
+        arrow(d, cx, m_bus, cx, MY - 2, color=BLUE)
 
-    d.text((100, 806), "模型", font=font(24, True), fill=NAVY)
+    d.text((M, MY - 34), "模型", font=font(24, True), fill=NAVY)
+    for name, bx in zip(["Kimi K3", "GLM-5.3-flash", "DeepSeek-v4.1-flash"], MX):
+        d.rounded_rectangle([bx, MY, bx + MW, MY + MH], radius=10, fill="white", outline=LINE, width=2)
+        d.text((bx + 24, MY + MH / 2), name, font=font(22, True), fill=INK, anchor="lm")
 
-    models = ["Kimi K3", "GLM-5.3-flash", "DeepSeek-v4.1-flash"]
-    for i, m in enumerate(models):
-        bx = 100 + i * 540
-        d.rounded_rectangle([bx, 840, bx + 500, 912], radius=10, fill="white", outline=LINE, width=2)
-        d.text((bx + 24, 866), m, font=font(22, True), fill=INK)
+    # 模型 → 指标：三条汇流，中轴下落
+    r_bus = MY + MH + 18
+    for cx in MC:
+        d.line([(cx, MY + MH), (cx, r_bus)], fill=BLUE, width=3)
+    d.line([(MC[0], r_bus), (MC[-1], r_bus)], fill=BLUE, width=3)
+    arrow(d, CX, r_bus, CX, r_bus + 34, color=BLUE)
 
-    # 模型 → 指标（三个模型汇入）
-    for cx in (350, 890, 1430):
-        d.line([(cx, 912), (cx, 930)], fill=BLUE, width=3)
-    d.line([(350, 930), (1430, 930)], fill=BLUE, width=3)
-    arrow(d, 900, 930, 900, 980, color=BLUE)
+    d.text((M, r_bus + 46), "指标", font=font(24, True), fill=NAVY)
+    d.text((M + 76, r_bus + 50), "命名准确率 %　·　平均 ΔE00", font=font(22), fill=INK)
 
-    d.text((100, 988), "指标", font=font(24, True), fill=NAVY)
-    d.text((176, 992), "命名准确率 %　·　平均 ΔE00", font=font(22), fill=INK)
-
-    d.text((100, 1074), "注：504 次调用 = 3 个模型 × (144 基准 + 72 干预)；一条记录一次调用，可逐条核对。",
+    d.text((M, h - 96), "注：504 次调用 = 3 个模型 × (144 基准 + 72 干预)；一条记录一次调用，可逐条核对。",
            font=font(20), fill=MUTED)
 
     img.save(OUT / "01_F01_实验设计.png", optimize=True)
