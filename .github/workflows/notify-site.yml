@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - '01_正式文档/**'
+      - '02_核心图_PNG/**'
+      - '03_数据产物/**'
   workflow_dispatch:
 
 jobs:
